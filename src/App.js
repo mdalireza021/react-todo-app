@@ -121,7 +121,7 @@ const deleteTodo=async(id)=>
     <GetDate/>
 
     <form className="form" onSubmit={handleSubmit}>
-            <input className="form-input" placeholder="what do you need to do?" type="text" id="text" value={text} onChange={handleChange} required/>
+            <input className="form-input" placeholder="add your new todo..." type="text" id="text" value={text} onChange={handleChange} required/>
             <button  className="todo-button" type="submit">
                 ADD
                 </button>
