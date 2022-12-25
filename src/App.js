@@ -1,6 +1,8 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
+import GridLoader from "react-spinners/GridLoader";
 import GetDate from "./components/GetDate";
+
 //import Todo from "./components/Todo";
 
 import {IoMdDoneAll} from "react-icons/io";
@@ -10,20 +12,19 @@ function App() {
 //const API="http://localhost:8080/api";
 const API="https://todo-backend-tlv5.vercel.app/api";
 
-
+const [loading,setLoading]=useState(true);
 const [todos,setTodos]=useState([]);
 const [text,setText]=useState("");
 
 useEffect(()=>{
-
   getAllTodos();
 },[]);
 
 const handleChange=(e)=>{
   const val=e.target.value;
   setText(val);
-  
 }
+
 const handleSubmit=(e)=>
 {
   e.preventDefault();
@@ -37,14 +38,16 @@ const getAllTodos=()=>
         .then((res)=> res.json())
         .then((data)=>
         {
-            
-            setTodos(data);
+          setTodos(data);
         })
         .catch((err)=>
         {
-            console.error('Error: ',err);
+          console.error('Error: ',err);
         })
-
+        .finally(()=>
+        {
+          setLoading(false);
+        })
 }
 
 //complete todo
@@ -58,9 +61,7 @@ const completeTodo=async(id)=>
     {
       todo.complete=data.complete;
     }
-
     return todo;
-
   }));
 }
 
@@ -79,6 +80,7 @@ const addTodo=async()=>
     })
   }).then((res)=>{
     res.json();
+    setLoading(true);
     getAllTodos();
     setText("");
   })
@@ -95,24 +97,35 @@ const deleteTodo=async(id)=>
     {
       throw Error('could not delete data');
     }
+    setLoading(true);
     getAllTodos();
+    
   })
   .catch((err)=>
   {
     console.error('Error: ',err);
   })
 }
-
   return (
-    <div><h1>Todo List</h1>
+    <div>
+      {loading ? <div className="sweet-loading">
+      <GridLoader
+        color={"#1a8cff"}
+        loading={loading}
+        size={70}
+        />
+    </div>
+    :
+    <div> 
+      <h1>Todo List</h1>
     <GetDate/>
+
     <form className="form" onSubmit={handleSubmit}>
             <input className="form-input" placeholder="what do you need to do?" type="text" id="text" value={text} onChange={handleChange} required/>
             <button  className="todo-button" type="submit">
                 ADD
                 </button>
     </form>
-  
     <div className="todo-container">
         <ul className="todo-list">
         {todos.map((todo)=>{ 
@@ -127,6 +140,9 @@ const deleteTodo=async(id)=>
         </ul>
       </div>
     </div>
-  );
 }
+</div>
+);
+}
+
 export default App;

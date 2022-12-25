@@ -46,24 +46,26 @@ p{
 .form
 
 {
-  padding: 4px;
+  
   min-height: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  
   
 }
 .form input
 
 {
   padding: 0.7rem;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   border: none;
   background: #f7fffe;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
   outline: none;
+  margin-left: 10px;
   
 }
 
@@ -71,7 +73,7 @@ p{
 
 {
   padding: 0.7rem 0.6rem 0.6rem;
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   border: none;
   background: #f7fffe;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -79,6 +81,7 @@ p{
   border-bottom-right-radius: 4px;
   color: #2B6BEB;
   cursor: pointer;
+  margin-right: 10px;
   
 }
 
@@ -166,6 +169,16 @@ p{
 .delete-btn:hover
 {
   background: #e20f24;
+}
+
+.sweet-loading
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100vh;
 }
 
 
